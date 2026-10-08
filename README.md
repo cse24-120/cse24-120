@@ -110,3 +110,5 @@ A responsive multi-page electronics e-commerce website with product browsing, pr
 [![Email](https://img.shields.io/badge/Email-molelwanei2004%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:molelwanei2004@gmail.com)
 
 > Building practical skills, reliable systems, and useful technology—one project at a time.
+
+<!-- Profile README -->
