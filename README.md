@@ -62,7 +62,7 @@ I approach technical challenges with integrity, creativity, and a willingness to
 </div>
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=cse24-120&theme=tokyo-night&hide_border=true&area=true" alt="GitHub contribution activity graph" width="95%" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=cse24-120&theme=tokyonight" alt="GitHub contribution activity graph" width="95%" />
 </div>
 
 ## Featured Projects
