@@ -67,27 +67,23 @@ I approach technical challenges with integrity, creativity, and a willingness to
 
 ## Featured Projects
 
-### AccomLink
+This section is maintained automatically from repository metadata. It refreshes every 15 minutes and can also be refreshed manually from the **Sync repository portfolio** workflow.
 
-An Android student-accommodation platform connecting students and landlords through property listings, authentication, favourites, role-based flows, real-time chat, maps, route features, media storage, and payment-related workflows.
+<!-- PROJECTS:START -->
 
-**Tech:** Kotlin, Jetpack Compose, Firebase, Firestore, Firebase Storage, OSMDroid  
-**Repository:** [cse24-120/AccomLink](https://github.com/cse24-120/AccomLink)
+### [Livestock-Vaccination-Tracker-LVT](https://github.com/cse24-120/Livestock-Vaccination-Tracker-LVT)
 
-### FNBB Banking System
+Livestock Vaccination Tracker (LVT) — a web application for recording farmers, their animals, and vaccinations given to each animal.
 
-A JavaFX desktop banking application supporting individual and company customers, account opening, savings, cheque and investment accounts, authentication, deposits, withdrawals, and transaction history.
+**Visibility:** Private · **Primary language:** Java · **Last updated:** 2026-11-15
 
-**Tech:** Java, JavaFX, FXML, Oracle SQL, MVC, repository-based data access  
-**Repository:** [cse24-120/FNBB-banking-system](https://github.com/cse24-120/FNBB-banking-system)
+### [Libis-Library-System](https://github.com/cse24-120/Libis-Library-System)
 
-### Rashid Electronics
+A Java web application for managing library books, members, and loans.
 
-A responsive multi-page electronics e-commerce website with product browsing, product details, cart presentation, account pages, contact functionality, and responsive navigation.
+**Visibility:** Private · **Primary language:** Java · **Last updated:** 2026-11-15
 
-**Tech:** HTML5, CSS3, JavaScript, responsive UI design  
-**Repository:** [cse24-120/Rashid_Electronics](https://github.com/cse24-120/Rashid_Electronics)
-
+<!-- PROJECTS:END -->
 ## Certifications & Training
 
 - **CCNA: Introduction to Networks** — Cisco Networking Academy
