@@ -1,0 +1,62 @@
+name: Sync repository portfolio
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-projects:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+      - name: Generate project portfolio
+        uses: actions/github-script@v7
+        env:
+          PROFILE_TOKEN: ${{ secrets.PROFILE_REPO_TOKEN }}
+        with:
+          # PROFILE_REPO_TOKEN is optional for public repositories. Add a fine-grained
+          # token with repository metadata read access and contents write access to this
+          # profile repository to include private repositories as well.
+          github-token: ${{ secrets.PROFILE_REPO_TOKEN || github.token }}
+          script: |
+            const fs = require('fs');
+            const readmePath = 'README.md';
+            const start = '<!-- PROJECTS:START -->';
+            const end = '<!-- PROJECTS:END -->';
+            const options = { sort: 'updated', direction: 'desc', per_page: 100 };
+            const repositories = process.env.PROFILE_TOKEN
+              ? await github.paginate(github.rest.repos.listForAuthenticatedUser, { ...options, visibility: 'all', affiliation: 'owner,collaborator,organization_member' })
+              : await github.paginate(github.rest.repos.listForUser, { ...options, username: context.repo.owner });
+            const projects = repositories
+              .filter((repository) => repository.owner?.login === context.repo.owner && repository.name !== context.repo.repo && !repository.archived)
+              .slice(0, 30)
+              .map((repository) => {
+                const description = repository.description?.trim() || 'No description provided yet.';
+                const visibility = repository.private ? 'Private' : 'Public';
+                const language = repository.language || 'Various';
+                const updated = repository.pushed_at ? new Date(repository.pushed_at).toISOString().slice(0, 10) : 'Not available';
+                return [`### [${repository.name}](${repository.html_url})`, description, `**Visibility:** ${visibility} · **Primary language:** ${language} · **Last updated:** ${updated}`].join('\n\n');
+              }).join('\n\n');
+            const generated = `${start}\n\n${projects || '_No repositories found._'}\n\n${end}`;
+            const readme = fs.readFileSync(readmePath, 'utf8');
+            const startIndex = readme.indexOf(start);
+            const endIndex = readme.indexOf(end);
+            if (startIndex === -1 || endIndex === -1 || endIndex < startIndex) {
+              core.setFailed(`README.md must contain ${start} and ${end} markers.`);
+            } else {
+              const before = readme.slice(0, startIndex);
+              const after = readme.slice(endIndex + end.length);
+              fs.writeFileSync(readmePath, `${before}${generated}${after}`.replace(/\s+$/, '') + '\n');
+            }
+      - name: Commit portfolio changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "docs: sync repository portfolio"
+          git push
