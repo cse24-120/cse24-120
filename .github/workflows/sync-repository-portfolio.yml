@@ -28,10 +28,13 @@ jobs:
             const readmePath = 'README.md';
             const start = '<!-- PROJECTS:START -->';
             const end = '<!-- PROJECTS:END -->';
+            if (!process.env.PROFILE_TOKEN) {
+              core.warning('Set PROFILE_REPO_TOKEN to sync private repositories; leaving README.md unchanged.');
+              return;
+            }
+
             const options = { sort: 'updated', direction: 'desc', per_page: 100 };
-            const repositories = process.env.PROFILE_TOKEN
-              ? await github.paginate(github.rest.repos.listForAuthenticatedUser, { ...options, visibility: 'all', affiliation: 'owner,collaborator,organization_member' })
-              : await github.paginate(github.rest.repos.listForUser, { ...options, username: context.repo.owner });
+            const repositories = await github.paginate(github.rest.repos.listForAuthenticatedUser, { ...options, visibility: 'all', affiliation: 'owner,collaborator,organization_member' });
             const projects = repositories
               .filter((repository) => repository.owner?.login === context.repo.owner && repository.name !== context.repo.repo && !repository.archived)
               .slice(0, 30)
