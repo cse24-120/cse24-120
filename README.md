@@ -69,6 +69,8 @@ I approach technical challenges with integrity, creativity, and a willingness to
 
 This section is maintained automatically from repository metadata. It refreshes every 15 minutes and can also be refreshed manually from the **Sync repository portfolio** workflow.
 
+This section is maintained automatically from repository metadata. Refreshing requires the `PROFILE_REPO_TOKEN` repository secret so private repositories can be read.
+
 <!-- PROJECTS:START -->
 
 ### [Livestock-Vaccination-Tracker-LVT](https://github.com/cse24-120/Livestock-Vaccination-Tracker-LVT)
